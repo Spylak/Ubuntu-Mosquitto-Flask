@@ -63,7 +63,7 @@ sudo apt upgrade
 in order to upgrade them to the latest version supported in Ubuntu 20.04 Server.
 
 ## Step 4
-### Setting up mosquitto for the MQQT functionality
+### Setting up mosquitto for the MQTT functionality
 
 ```sh
 sudo apt install mosquitto mosquitto-clients
@@ -238,3 +238,8 @@ Remember that if your firewall is active you would need to modify it approprietl
 The webserver would store the users in-memory and show them when someone visits the public IP/domain of the server.
 
 If you shutdown or restart the vm you would need ot restart the flask app, in order ot avoid that you could create a service that does it automatically.
+
+
+## Sources
+- [Flask-MQTT](https://www.emqx.com/en/blog/how-to-use-mqtt-in-flask)
+- [RSyslog-omprog](https://www.rsyslog.com/doc/v8-stable/configuration/modules/omprog.html)
