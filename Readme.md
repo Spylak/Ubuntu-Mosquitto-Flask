@@ -96,13 +96,13 @@ Place the code below in the script:
 ```sh
 #!/bin/bash
 timestamp=$(date "+%Y-%m-%d %H:%M:%S")
+sleep 1
 readarray -t ar < <(who)
 usernamesString=""
-for i in "$ar[@]"
+for i in "${ar[@]}"
 do
 username=$(echo $i | awk '{print $1}')
 usernamesString+="$username, "
-usernamesString+="mid, "
 done
 usernamesString=${usernamesString%,*}
 mosquitto_pub -t "users" -m "$timestamp $usernamesString"
@@ -120,10 +120,10 @@ sudo nano /etc/rsyslog.conf
 Edit /etc/rsyslog.conf with the following lines in the end of the file:
 ```
  module(load="omprog")
- if $msg contains "new session" and $programname startswith "systemd-logind" then {
+ if $msg contains "New session" and $programname startswith "systemd-logind" then {
          action(type="omprog" binary="/bin/bash /usr/local/bin/loginTrack.sh opened" )
  }
- if $msg contains "removed session" and $programname startswith "systemd-logind" then {
+ if $msg contains "Removed session" and $programname startswith "systemd-logind" then {
          action(type="omprog" binary="/bin/bash /usr/local/bin/loginTrack.sh closed" )
  }
 ```
@@ -225,7 +225,7 @@ if __name__ == '__main__':
 
     mqtt.client.loop_start()
 
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=True)
 ```
 
 Finally you can run the app using python3 app.py
